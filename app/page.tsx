@@ -1,5 +1,9 @@
 import styles from './page.module.css'
 
 export default function Home() {
-  return <>Welcome{/* landing page */}</>
+  return (
+    <>
+      <section>Welcome</section>
+    </>
+  )
 }

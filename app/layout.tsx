@@ -1,14 +1,17 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from '../components/Navbar/Navbar'
 
-const inter = Inter({ subsets: ['latin'] })
+import { Roboto_Mono } from 'next/font/google'
 
 export const metadata: Metadata = {
   title: 'To Do App',
   description: 'Add, Edit and Delete tasks',
 }
+const robotoMono = Roboto_Mono({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 export default function RootLayout({
   children,
@@ -17,9 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={robotoMono.className}>
         <Navbar />
-        {children}
+        <main className="main">{children}</main>
       </body>
     </html>
   )
