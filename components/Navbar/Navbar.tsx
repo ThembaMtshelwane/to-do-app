@@ -7,12 +7,16 @@ import styles from './navbar.module.css'
 import LoginModal from '../Modals/LoginModal/LoginModal'
 import { useState } from 'react'
 import SignUpModal from '../Modals/SignUpModal/SignUpModal'
+import { onAuthStateChanged, User } from 'firebase/auth'
+import { auth } from '@/firebase/firebaseConfig'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 type Props = {}
 
 const Navbar = (props: Props) => {
-  const [showLoginModal, setShowLoginModal] = useState(false)
-  const [showSignUpModal, setShowSignUpModal] = useState(false)
+  const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
+  const [showSignUpModal, setShowSignUpModal] = useState<boolean>(false)
+  const [user, loading, error] = useAuthState(auth)
 
   const openSignUpModal = () => {
     setShowSignUpModal(true)
@@ -29,14 +33,15 @@ const Navbar = (props: Props) => {
         <Link href="/dashboard" className={styles.leftSection}>
           <img className={styles.logoContainer} src="" alt="" />
         </Link>
+        <p> {user?.email}</p>
         <section className={styles.rightSection}>
-          {1 ? (
+          {user ? (
+            <LogOutButton />
+          ) : (
             <section className={styles.authButtons}>
               <AuthButtons buttonName="Login" openModal={openLoginModal} />
               <AuthButtons buttonName="Register" openModal={openSignUpModal} />
             </section>
-          ) : (
-            <LogOutButton />
           )}
         </section>
       </nav>
