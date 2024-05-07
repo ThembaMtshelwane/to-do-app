@@ -15,12 +15,10 @@ const Navbar = (props: Props) => {
   const [showSignUpModal, setShowSignUpModal] = useState(false)
 
   const openSignUpModal = () => {
-    console.log('Register')
     setShowSignUpModal(true)
     setShowLoginModal(false)
   }
   const openLoginModal = () => {
-    console.log('Login button pressed therefore open modal')
     setShowLoginModal(true)
     setShowSignUpModal(false)
   }
