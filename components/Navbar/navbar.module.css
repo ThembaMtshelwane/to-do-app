@@ -1,5 +1,5 @@
 .navbar {
-  border: 2px solid green;
+  /* border: 2px solid green; */
   display: flex;
   justify-content: space-between;
   padding: 5px;
@@ -16,13 +16,14 @@
 }
 
 .logo {
-  border: 2px solid red;
+  /* border: 2px solid red; */
   width: 150px;
 }
 
 .rightSection {
   display: flex;
-  border: 2px solid red;
+  border: 2px solid rgba(0, 179, 255, 0.413);
+  align-items: center;
 }
 
 .authButtons {

@@ -1,0 +1,27 @@
+.addContainer {
+  display: flex;
+  width: 100%;
+  max-width: 480px;
+}
+
+.data {
+  border: 2px solid rgba(0, 195, 255, 0.742);
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  width: 80%;
+}
+
+.labels {
+  margin-bottom: 5px;
+}
+
+.inputs {
+  border: 2px solid rgba(0, 195, 255, 0.742);
+  margin-bottom: 5px;
+  padding: 2px;
+}
+
+.buttonContainer {
+  width: 100px;
+}
