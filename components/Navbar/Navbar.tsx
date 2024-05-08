@@ -5,7 +5,7 @@ import AuthButtons from '../Buttons/AuthButtons/AuthButtons'
 import LogOutButton from '../Buttons/LogOutButton/LogOutButton'
 import styles from './navbar.module.css'
 import LoginModal from '../Modals/LoginModal/LoginModal'
-import { useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import SignUpModal from '../Modals/SignUpModal/SignUpModal'
 import { onAuthStateChanged, User } from 'firebase/auth'
 import { auth } from '@/firebase/firebaseConfig'
@@ -17,6 +17,23 @@ const Navbar = (props: Props) => {
   const [showLoginModal, setShowLoginModal] = useState<boolean>(false)
   const [showSignUpModal, setShowSignUpModal] = useState<boolean>(false)
   const [user, loading, error] = useAuthState(auth)
+  // const [storedUser, setStoredUser] = useState<any>(null)
+
+  // useEffect(() => {
+  //   if (storedUser) {
+  //     return
+  //   } else {
+  //     if (user) {
+  //       //Logged in => store user locally
+  //       localStorage.setItem('user', JSON.stringify(user))
+  //       setStoredUser(user)
+  //     } else {
+  //       //Logged Out => remove user locally
+  //       localStorage.removeItem('user')
+  //       setStoredUser(null)
+  //     }
+  //   }
+  // }, [user])
 
   const openSignUpModal = () => {
     setShowSignUpModal(true)
@@ -35,13 +52,27 @@ const Navbar = (props: Props) => {
         </Link>
         <p> {user?.email}</p>
         <section className={styles.rightSection}>
-          {user ? (
-            <LogOutButton />
+          {loading ? (
+            <p>Loading user...</p>
           ) : (
-            <section className={styles.authButtons}>
-              <AuthButtons buttonName="Login" openModal={openLoginModal} />
-              <AuthButtons buttonName="Register" openModal={openSignUpModal} />
-            </section>
+            <Suspense fallback="loading user">
+              <>
+                {user ? (
+                  <LogOutButton />
+                ) : (
+                  <section className={styles.authButtons}>
+                    <AuthButtons
+                      buttonName="Login"
+                      openModal={openLoginModal}
+                    />
+                    <AuthButtons
+                      buttonName="Register"
+                      openModal={openSignUpModal}
+                    />
+                  </section>
+                )}
+              </>
+            </Suspense>
           )}
         </section>
       </nav>
