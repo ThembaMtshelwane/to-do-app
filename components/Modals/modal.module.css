@@ -53,6 +53,7 @@
 .inputs,
 .errorContainer {
   margin-bottom: 5px;
+  color: rgb(5, 25, 35);
 }
 
 .inputs {

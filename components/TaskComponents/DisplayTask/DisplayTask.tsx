@@ -7,15 +7,20 @@ import styles from './displaytask.module.css'
 import EditButton from '@/components/Buttons/EditButton.tsx/EditButton'
 import DeleteButton from '@/components/Buttons/DeleteButton/DeleteButton'
 
+type Data = {
+  id: string
+  task: string
+}
+
 type Props = {}
 const DisplayTask = (props: Props) => {
-  const [tasks, setTasks] = useState<string[]>()
+  const [tasks, setTasks] = useState<Data[]>([])
   useEffect(() => {
     const fetchData = async () => {
-      const storeData: string[] = []
+      const storeData: Data[] = []
       const querySnapshot = await getDocs(collection(db, 'tasks'))
       querySnapshot.forEach((doc) => {
-        storeData.push(doc.data().task)
+        storeData.push({ id: doc.id, task: doc.data().task })
       })
       setTasks(storeData)
     }
@@ -26,12 +31,12 @@ const DisplayTask = (props: Props) => {
   return (
     <ul>
       {tasks
-        ? tasks.map((element, index) => (
-            <li key={index} className={styles.taskContainer}>
-              <section className={styles.leftSection}>{element}</section>
+        ? tasks.map((element) => (
+            <li key={element.id} className={styles.taskContainer}>
+              <section className={styles.leftSection}>{element.task}</section>
               <section className={styles.rightSection}>
-                <EditButton />
-                <DeleteButton />
+                <EditButton id={element.id} />
+                <DeleteButton id={element.id} />
               </section>
             </li>
           ))
