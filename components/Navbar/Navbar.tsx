@@ -50,7 +50,7 @@ const Navbar = (props: Props) => {
         <Link href="/dashboard" className={styles.leftSection}>
           <img className={styles.logoContainer} src="" alt="" />
         </Link>
-        <p> {user?.email}</p>
+        {/* <p> {user?.email}</p> */}
         <section className={styles.rightSection}>
           {loading ? (
             <p>Loading user...</p>

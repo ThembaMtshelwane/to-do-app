@@ -16,11 +16,11 @@ body {
 .main {
   display: flex;
   flex-direction: column;
-  /* border: 2px solid rgba(29, 88, 159, 0.203); */
+  border: 2px solid rgba(29, 88, 159, 0.203);
   /* border-radius: 10px; */
   width: 80%;
   min-height: 80%;
-  margin: auto;
+  margin: 15px auto;
   max-width: 600px;
   padding: 20px 0px;
 }

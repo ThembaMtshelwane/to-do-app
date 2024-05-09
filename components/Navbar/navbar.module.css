@@ -23,7 +23,7 @@
 
 .rightSection {
   display: flex;
-  border: 2px solid rgba(0, 179, 255, 0.413);
+  /* border: 2px solid rgba(0, 179, 255, 0.413); */
   align-items: center;
 }
 
