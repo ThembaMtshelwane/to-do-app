@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import styles from './displaytask.module.css'
 import EditButton from '@/components/Buttons/EditButton.tsx/EditButton'
 import DeleteButton from '@/components/Buttons/DeleteButton/DeleteButton'
+import EditModal from '@/components/Modals/EditModal/EditModal'
 
 type Data = {
   id: string
@@ -15,6 +16,7 @@ type Data = {
 type Props = {}
 const DisplayTask = (props: Props) => {
   const [tasks, setTasks] = useState<Data[]>([])
+
   useEffect(() => {
     const fetchData = async () => {
       const storeData: Data[] = []
@@ -29,19 +31,27 @@ const DisplayTask = (props: Props) => {
   console.log('tasks', tasks)
 
   return (
-    <ul>
-      {tasks
-        ? tasks.map((element) => (
-            <li key={element.id} className={styles.taskContainer}>
-              <section className={styles.leftSection}>{element.task}</section>
-              <section className={styles.rightSection}>
-                <EditButton id={element.id} />
-                <DeleteButton id={element.id} />
-              </section>
-            </li>
-          ))
-        : ''}
-    </ul>
+    <section>
+      <ul>
+        {tasks
+          ? tasks.map((element) => (
+              <li key={element.id} className={styles.taskContainer}>
+                <section className={styles.leftSection}>{element.task}</section>
+                <section className={styles.rightSection}>
+                  {/* <EditButton openModal={openEditModal} /> */}
+                  <EditButton id={element.id} />
+                  <DeleteButton id={element.id} />
+                </section>
+                {/* <EditModal
+                  id={element.id}
+                  show={showEditModal}
+                  setShowEditModal={setShowEditModal}
+                /> */}
+              </li>
+            ))
+          : ''}
+      </ul>
+    </section>
   )
 }
 export default DisplayTask

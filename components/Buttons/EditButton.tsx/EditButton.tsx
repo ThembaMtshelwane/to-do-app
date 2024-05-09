@@ -1,21 +1,30 @@
-import { db } from '@/firebase/firebaseConfig'
+'use client'
+
 import modStyles from '../modifierButtons.module.css'
-import { doc, setDoc } from 'firebase/firestore'
+import EditModal from '@/components/Modals/EditModal/EditModal'
+import { useState } from 'react'
 
 type Props = { id: string }
 const EditButton = ({ id }: Props) => {
-  const editTask = async () => {
-    // try {
-    //   await setDoc(doc(db, 'tasks', id), {task })
-    //   console.log('Task updated successfully')
-    // } catch (error) {
-    //   console.log('Task NOT edited')
-    // }
+  const [showEditModal, setShowEditModal] = useState<boolean>(false)
+  const openEditModal = () => {
+    setShowEditModal(true)
   }
   return (
-    <button onClick={editTask} className={modStyles.buttons}>
-      Edit
-    </button>
+    <section className={''}>
+      <button onClick={openEditModal} className={modStyles.buttons}>
+        Edit
+      </button>
+      {showEditModal ? (
+        <EditModal
+          id={id}
+          show={showEditModal}
+          setShowEditModal={setShowEditModal}
+        />
+      ) : (
+        ''
+      )}
+    </section>
   )
 }
 export default EditButton
