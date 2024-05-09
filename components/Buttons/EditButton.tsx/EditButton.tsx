@@ -1,5 +1,7 @@
+import modStyles from '../modifierButtons.module.css'
+
 type Props = {}
 const EditButton = (props: Props) => {
-  return <div>EditButton</div>
+  return <button className={modStyles.buttons}>Edit</button>
 }
 export default EditButton

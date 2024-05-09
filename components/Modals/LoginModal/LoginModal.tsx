@@ -25,8 +25,6 @@ const LoginModal = ({ show, setShowLoginModal }: Props) => {
         email,
         password
       )
-      const user = userCredential.user
-      console.log('Logged in successfully:', user)
       router.push('/dashboard')
       reset()
     } catch (error) {
