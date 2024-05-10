@@ -4,24 +4,31 @@ import AddButton from '@/components/Buttons/AddButton/AddButton'
 import { useState } from 'react'
 import styles from './addtask.module.css'
 import { addDoc, collection } from 'firebase/firestore'
-import { db } from '@/firebase/firebaseConfig'
+import { auth, db } from '@/firebase/firebaseConfig'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 type Props = {}
 const AddTask = (props: Props) => {
   const [task, setTask] = useState('')
-  const [loading, isLoading] = useState(false)
+  // const [loading, isLoading] = useState(false)
+  const [user, loading, error] = useAuthState(auth)
 
   const addTask = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    isLoading(true)
-    try {
-      const docRef = await addDoc(collection(db, 'tasks'), { task })
-      console.log('Tasks uploaded')
-    } catch (e) {
-      console.error('Error adding document: ', e)
+    // isLoading(true)
+    if (user && user.uid) {
+      try {
+        const docRef = await addDoc(collection(db, 'users/tasks', user.uid), {
+          task,
+        })
+        console.log('Tasks uploaded')
+      } catch (e) {
+        console.error('Error adding document: ', e)
+      }
+      setTask('')
     }
-    setTask('')
-    isLoading(false)
+
+    // isLoading(false)
   }
 
   return (
